@@ -1,0 +1,26 @@
+% !TEX program = xelatex
+% !TEX options = --shell-escape -synctex=1 -interaction=nonstopmode -file-line-error "%DOC%"
+\documentclass{ctexart}
+
+\input{setup/format.tex}
+\input{setup/package.tex}
+\newcommand{\ud}{\mathrm{d}}
+
+\title{双群扩散理论通量计算}
+\author[a]{徐大成}
+\affil[a]{清华大学工程物理系}
+\date{}
+
+\begin{document}
+\maketitle
+\input{body/abstract}
+\input{body/introduction}
+\input{body/calculate}
+\input{body/result}
+\input{body/discussion}
+\input{body/conclusion}
+
+\bibliographystyle{unsrt}
+\bibliography{ref}
+
+\end{document}

@@ -1,0 +1,9 @@
+*__pycache__*
+*.npy
+*.npz
+*.ipynb_checkpoints*
+*.png
+*.svg
+*.jpg
+*.pdf
+.DS_Store
