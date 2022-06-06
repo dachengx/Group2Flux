@@ -1,9 +1,47 @@
 \section{引言}
 
+无外源条件下的稳态多群中子扩散方程如式\ref{eq:multi_group}。
+
 \begin{align}
-    -\nabla\cdot D_g\nabla\phi_g(\vectorbold{r}) + \Sigma_{t,g}\phi_g(\vectorbold{r}) &= \sum_{g'=1}^G\Sigma_{g'\rightarrow g}\phi_{g'}(\vectorbold{r}) + \frac{\chi_g}{k_\mathrm{eff}}\sum_{g'=1}^G(\nu\Sigma_f)_{g'}\phi_{g'}(\vectorbold{r}) \\
-    g &= 1,2,\cdots,G
+    \label{eq:multi_group}
+    \begin{split}
+        -\nabla\cdot D_g\nabla\phi_g(\vectorbold{r}) + \Sigma_{t,g}\phi_g(\vectorbold{r}) &= \sum_{g'=1}^G\Sigma_{g'\rightarrow g}\phi_{g'}(\vectorbold{r}) + \frac{\chi_g}{k_\mathrm{eff}}\sum_{g'=1}^G(\nu\Sigma_f)_{g'}\phi_{g'}(\vectorbold{r}) \\
+        g &= 1,2,\cdots,G
+    \end{split}
 \end{align}
+
+其中群常数$D_g$为扩散系数，$\phi_g$为中子通量密度，$\chi_g$为中子裂变谱，$(\nu\Sigma_f)_{g'}$为中子产生截面。
+
+\begin{align}
+    \label{eq:two_group}
+    \begin{split}
+        -D_1\nabla^2\phi_1(r) + \Sigma_{t1}\phi_1(r) &= \left[\Sigma_{1\rightarrow 1}\phi_1(r) + \Sigma_{2\rightarrow 1}\phi_2(r)\right] + \frac{\chi_1}{k_\mathrm{eff}}\left[\nu\Sigma_{f1}\phi_1(r)+\nu\Sigma_{f2}\phi_2(r)\right] \\
+        -D_2\nabla^2\phi_2(r) + \Sigma_{t2}\phi_2(r) &= \left[\Sigma_{1\rightarrow 2}\phi_1(r) + \Sigma_{2\rightarrow 2}\phi_2(r)\right] + \frac{\chi_2}{k_\mathrm{eff}}\left[\nu\Sigma_{f1}\phi_1(r)+\nu\Sigma_{f2}\phi_2(r)\right]
+    \end{split}
+\end{align}
+
+\begin{align}
+    \label{eq:two2_group}
+    \begin{split}
+        -D_1\nabla^2\phi_1(r) + \Sigma_{t1}\phi_1(r) &= \Sigma_{1\rightarrow 1}\phi_1(r) + \frac{1}{k_\mathrm{eff}}\left[\nu\Sigma_{f1}\phi_1(r)+\nu\Sigma_{f2}\phi_2(r)\right] \\
+        -D_2\nabla^2\phi_2(r) + \Sigma_{t2}\phi_2(r) &= \Sigma_{1\rightarrow 2}\phi_1(r) + \Sigma_{2\rightarrow 2}\phi_2(r)
+    \end{split}
+\end{align}
+
+\begin{align}
+    \label{eq:two3_group}
+    \begin{split}
+        -D_1\nabla^2\phi_1(r) + \Sigma_r\phi_1(r) &= \frac{1}{k_\mathrm{eff}}\left[\nu\Sigma_{f1}\phi_1(r)+\nu\Sigma_{f2}\phi_2(r)\right] \\
+        -D_2\nabla^2\phi_2(r) + \Sigma_{a2}\phi_2(r) &= \Sigma_{1\rightarrow 2}\phi_1(r)
+    \end{split}
+\end{align}
+
+\begin{equation}
+    \pmb{\Phi} = \begin{bmatrix}
+        \phi_1(r) \\
+        \phi_2(r)
+    \end{bmatrix}
+\end{equation}
 
 \begin{table}[H]
     \centering
