@@ -5,7 +5,7 @@
 \begin{align}
     \label{eq:multi_group}
     \begin{split}
-        -\nabla\cdot D_g\nabla\phi_g(\vectorbold{r}) + \Sigma_{t,g}\phi_g(\vectorbold{r}) &= \sum_{g'=1}^G\Sigma_{g'\rightarrow g}\phi_{g'}(\vectorbold{r}) + \frac{\chi_g}{k_\mathrm{eff}}\sum_{g'=1}^G(\nu\Sigma_f)_{g'}\phi_{g'}(\vectorbold{r}) \\
+        -\nabla\cdot D_g\nabla\phi_g(\pmb{r}) + \Sigma_{t,g}\phi_g(\pmb{r}) &= \sum_{g'=1}^G\Sigma_{g'\rightarrow g}\phi_{g'}(\pmb{r}) + \frac{\chi_g}{k_\mathrm{eff}}\sum_{g'=1}^G(\nu\Sigma_f)_{g'}\phi_{g'}(\pmb{r}) \\
         g &= 1,2,\cdots,G
     \end{split}
 \end{align}
@@ -43,16 +43,28 @@
     \end{bmatrix}
 \end{equation}
 
+\begin{equation}
+    \pmb{\nabla}^2\pmb{\Phi}(\pmb{r})+\pmb{A}\pmb{\Phi}(\pmb{r}) = \pmb{0}
+\end{equation}
+
+\begin{equation}
+    \pmb{A} = \begin{bmatrix}
+        \frac{\frac{\nu\Sigma_{f1}}{k_\mathrm{eff}}-\Sigma_r}{D_1} & \frac{\nu\Sigma_{f2}}{k_\mathrm{eff}D_1} \\
+        \frac{\Sigma_{1\rightarrow2}}{D_2} & -\frac{\Sigma_{a2}}{D_2}
+    \end{bmatrix}
+\end{equation}
+
 \begin{table}[H]
     \centering
     \caption{}
     \label{tab:}
-    \begin{tabular}{lllll}    \toprule
+    \begin{tabular}{lllll}
+    \toprule
     \multirow{2}{*}{Group constants} & \multicolumn{2}{c}{Core} & \multicolumn{2}{c}{Reflective layer} \\
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}
      & Group 1 & Group 2 & Group 1 & Group 2 \\
     \midrule
-    $\nu\Sigma_f/\si{cm^{-1}}$ & $0.008476$ & $0.18514$ & - & - \\
+    $\nu\Sigma_f/\si{cm^{-1}}$ & $0.008476$ & $0.18514$ & $0$ & $0$ \\
     $\Sigma_a/\si{cm^{-1}}$ & $0.01207$ & $0.1210$ & $0.0004$ & $0.0197$ \\
     $D/\si{cm}$ & $1.2627$ & $0.3543$ & $1.13$ & $0.16$ \\
     $\Sigma_r/\si{cm^{-1}}$ & $0.02619$ & $0.1210$ & $0.0494$ & $0.0197$ \\

@@ -7,9 +7,7 @@ all : pdf
 pdf : main.pdf
 
 main.pdf : 
-	latexmk -C && latexmk -xelatex main.tex
-	latexmk -C && latexmk -xelatex main.tex
-	latexmk -C && latexmk -xelatex main.tex
+	latexmk -C && latexmk -xelatex -shell-escape main.tex
 
 clean :
 	latexmk -C

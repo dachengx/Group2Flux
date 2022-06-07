@@ -6,4 +6,5 @@
 *.svg
 *.jpg
 *.pdf
+*svg-inkscape*
 .DS_Store
