@@ -1,9 +1,31 @@
 \section{讨论与总结}
 \label{sec:discussion}
 
+实际上$\det \pmb{M}(r_0)$的解有多个，如图\ref{fig:det_M_r_far}。
+
 \begin{figure}[H]
     \centering
     \includesvg[width=0.6\linewidth]{figures/det_M_r_far.svg}
     \caption{$\det \pmb{M}(r)$}
     \label{fig:det_M_r_far}
 \end{figure}
+
+但第\ref{sec:calculation}节的计算中只取了$r_0$的正数解的最小值。
+如此选择从物理上是合理的，对于无限大平板反应堆，反射层的大小与堆芯无关，在已知厚度为$r_0=38.715\si{cm}$的芯部可以达到临界时，仍增大堆芯厚度，会使得反应堆超临界。
+
+若强行使用其他$r_0$的正数解，如$r_0=154.684\si{cm}$，则得到如图\ref{fig:flux_r_far}所示的中子通量密度，显然这个结果是不能成立的，因为通量密度需要恒正。
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=0.6\linewidth]{figures/flux_r_far.svg}
+    \caption{$\phi_1,\phi_2$计算结果，使用$r_0=154.684\si{cm}$，红色虚线为芯部与反射层的边界}
+    \label{fig:flux_r_far}
+\end{figure}
+
+由图\ref{fig:flux_r}可以看到，中子通量密度曲线在芯部与反射层交界面附近有一个凸起，
+主要原因是反射层内的热中子吸收比芯部小，而其慢化能力比芯部强，由堆芯泄漏出来的快中子，由于反射层的慢化作用在反射层内大部分都变成了热中子。
+
+在芯部快中子通量密度$\phi_{1c}$要比热中子通量密度$\phi_{2c}$大很多，且通量密度的形状有较大差异。
+这主要是因为裂变产生的主要是快中子，而其中一部分在慢化为热中子的过程中已经泄漏出芯部或被吸收了。
+
+本文从双群扩散方程出发，以一个典型压水堆的群常数为例，计算了双群中子通量密度。计算结果符合物理预期，加深了作者对反应堆物理的认知。
