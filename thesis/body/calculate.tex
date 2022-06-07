@@ -1,12 +1,21 @@
 \section{计算过程}
 \label{sec:calculation}
 
+共有两组函数矢量待解，其中$\phi_{1c}(r)$
+
 \subsection{芯部通量参数化}
 
+为了求解方程\ref{eq:A_vector_phi}，将矩阵$\pmb{A}$进行特征值分解，首先求出特征值$\mu^2,-\nu_2$，如式\ref{eq:mu_nu_c}。
+
 \begin{align}
-    \mu^2 &= \frac{1}{2}\left[-\left(\frac{1}{L^2}+\frac{1}{\tau}\right)+\sqrt{\left(\frac{1}{L^2}+\frac{1}{\tau}\right)^2+\frac{4(\delta-1)}{\tau L^2}}\right] \\
-    \nu^2 &= \frac{1}{2}\left[\left(\frac{1}{L^2}+\frac{1}{\tau}\right)+\sqrt{\left(\frac{1}{L^2}+\frac{1}{\tau}\right)^2+\frac{4(\delta-1)}{\tau L^2}}\right]
+    \label{eq:mu_nu_c}
+    \begin{split}
+        \mu^2 &= \frac{1}{2}\left[-\left(\frac{1}{L^2}+\frac{1}{\tau}\right)+\sqrt{\left(\frac{1}{L^2}+\frac{1}{\tau}\right)^2+\frac{4(\delta-1)}{\tau L^2}}\right] \\
+        \nu^2 &= \frac{1}{2}\left[\left(\frac{1}{L^2}+\frac{1}{\tau}\right)+\sqrt{\left(\frac{1}{L^2}+\frac{1}{\tau}\right)^2+\frac{4(\delta-1)}{\tau L^2}}\right]
+    \end{split}
 \end{align}
+
+其中
 
 \begin{align}
     \begin{split}
@@ -15,80 +24,126 @@
     \end{split}
 \end{align}
 
+当反应堆临界时有效增值系数$k_\mathrm{eff}=1$，此时$\pmb{A}$和$\mu^2,\nu^2$均为常量。由群常数可计算得到，$\mu^2\neq-\nu^2$。
+同时也可以求出$\mu^2,-\nu^2$对应的特征单位向量$\pmb{u}_1,\pmb{u}_2$，如式\ref{eq:u12}。
+
 \begin{align}
-    \pmb{u}_1 = \begin{bmatrix}
-        \alpha \\
-        s_1\alpha
-    \end{bmatrix},\ 
-    \pmb{u}_2 = \begin{bmatrix}
-        \beta \\
-        s_2\beta
-    \end{bmatrix}
+    \label{eq:u12}
+    \begin{split}
+        \pmb{u}_1 = \begin{bmatrix}
+            \alpha \\
+            s_1\alpha
+        \end{bmatrix},\ 
+        \pmb{u}_2 = \begin{bmatrix}
+            \beta \\
+            s_2\beta
+        \end{bmatrix}
+    \end{split}
 \end{align}
+
+其中$s_{1,2}$为群常数和$k_\mathrm{eff}$的函数，$\alpha,\beta$为归一化常数，
 
 \begin{align}
     s_1 &= \frac{\frac{\Sigma_{1\rightarrow 2}}{D_2}}{\mu^2 + \frac{1}{L^2}},\ s_2 = \frac{\frac{\Sigma_{1\rightarrow 2}}{D_2}}{\frac{1}{L^2}-\nu^2} \\
     \alpha &= \left(1+s_1^2\right)^{-1/2},\ \beta = \left(1+s_2^2\right)^{-1/2}
 \end{align}
 
+此时由单位特征向量$\pmb{u}_1,\pmb{u}_2$构成的转移矩阵$\pmb{U}$如式\ref{eq:U}。
+
 \begin{align}
+    \label{eq:U}
     \pmb{U} &= \begin{bmatrix}
         \pmb{u}_1, \pmb{u}_2
     \end{bmatrix}
 \end{align}
 
+有如下特征值分解：
+
 \begin{align}
     \pmb{A}\pmb{U} &= \pmb{U}\pmb{\Lambda}
 \end{align}
+
+其中$\pmb{\Lambda}$为对角阵。
 
 \begin{align}
     \pmb{\Lambda} &= \begin{bmatrix}
         \mu^2 & \\
          & -\nu^2
-    \end{bmatrix}
+    \end{bmatrix}.
 \end{align}
 
+引入函数向量变换
+
 \begin{align}
+    \label{eq:phi_psi}
     \pmb{\Phi}(r) &= \pmb{U}\pmb{\Psi}(r)
 \end{align}
 
-\begin{align}
-    \pmb{U}\left\{\pmb{\nabla}^2\pmb{\Psi}(r)+\pmb{\Lambda}\pmb{\Psi}(r)\right\} &= \pmb{0}
-\end{align}
+式中$\pmb{\Psi}(r)$为新的函数矢量，设其两个函数分别为$\psi_{1,2}(r)$，则有方程如式\ref{eq:psi_12}。
 
 \begin{align}
-    \nabla^2\psi_1(r) + \mu^2\psi_1(r) &= 0 \\
-    \nabla^2\psi_2(r) + \mu^2\psi_2(r) &= 0
-\end{align}
-
-\begin{equation}
     \pmb{\Psi} = \begin{bmatrix}
         \psi_1(r) \\
         \psi_2(r)
     \end{bmatrix}
-\end{equation}
+    \label{eq:psi_12}
+    \pmb{U}\left\{\pmb{\nabla}^2\pmb{\Psi}(r)+\pmb{\Lambda}\pmb{\Psi}(r)\right\} &= \pmb{0}
+\end{align}
+
+因$\pmb{U}$中的元素不全为$0$，则必然要求如下方程恒成立：
+
+\begin{align}
+    \nabla^2\psi_1(r) + \mu^2\psi_1(r) &= 0 \\
+    \nabla^2\psi_2(r) - \nu^2\psi_2(r) &= 0
+\end{align}
+
+这两个常系数常微分方程的通解为：
 
 \begin{align}
     \psi_{1c}(r) &= A_c\cos{\mu_c r} + A'_c\sin{\mu_c r} \\
     \psi_{2c}(r) &= B_c e^{-\nu_c r} + B'_c e^{\nu_c r}
 \end{align}
 
-\begin{align}
-    \psi_{1c}(r) &= A_c\cos{\mu_c r} \\
-    \psi_{2c}(r) &= B_c\left(e^{-\nu_c r} + e^{\nu_c r}\right)
-\end{align}
+其中$A_c,B_c,A'_c,B'_c$均为待求常数，为与反射层中物理量做区别，以下对芯部物理量使用下标$c$，对反射层物理量使用下标$r$。
+
+由于反应堆几何关于$r=0$对称，则$A'_c=0$，亦即奇函数贡献为$0$。
+同时$\psi_{2c}(r)$为偶函数，在$r=0$时应连续且可导，则有$B_c=B'_c$，最终芯部的参数化为式\ref{eq:para_psi}。
 
 \begin{align}
-    \phi_{1c}(r) &= \alpha\psi_{1c}(r) + \beta\psi_{2c}(r) = \alpha A_c\cos{\mu_c r} + \beta B_c\left(e^{-\nu_c r} + e^{\nu_c r}\right) \\
-    \phi_{2c}(r) &= s_1\alpha\psi_{1c}(r) + s_2\beta\psi_{2c}(r) = s_1\alpha A_c\cos{\mu_c r} + s_2\beta B_c\left(e^{-\nu_c r} + e^{\nu_c r}\right)
+    \label{eq:para_psi}
+    \begin{split}
+        \psi_{1c}(r) &= A_c\cos{\mu_c r} \\
+        \psi_{2c}(r) &= B_c\left(e^{-\nu_c r} + e^{\nu_c r}\right)
+    \end{split}
 \end{align}
+
+代回函数向量变换\ref{eq:phi_psi}，得到$r$空间上的中子通量密度参数化函数，如式\ref{eq:para_phi}。
+
+\begin{align}
+    \label{eq:para_phi}
+    \begin{split}
+        \phi_{1c}(r) &= \alpha\psi_{1c}(r) + \beta\psi_{2c}(r) = \alpha A_c\cos{\mu_c r} + \beta B_c\left(e^{-\nu_c r} + e^{\nu_c r}\right) \\
+        \phi_{2c}(r) &= s_1\alpha\psi_{1c}(r) + s_2\beta\psi_{2c}(r) = s_1\alpha A_c\cos{\mu_c r} + s_2\beta B_c\left(e^{-\nu_c r} + e^{\nu_c r}\right)
+    \end{split}
+\end{align}
+
+待求参数为$A_c,B_c$，公式适用于$r \leq r_0/2$的区间。
 
 \subsection{反射层通量参数化}
 
+对于反射层中的中子通量密度，由于$\nu\Sigma_f=0$，没有中子裂变谱的贡献，处理方式较芯部简单。首先列出无中子源的反射层双群扩散方程，如式\ref{eq:two_reflect}。
+
 \begin{align}
-    -D_{1r}\nabla^2\phi_{1r}(r) + \Sigma_{rr}\phi_{1r}(r) &= 0 \\
-    -D_{2r}\nabla^2\phi_{2r}(r) + \Sigma_{a2r}\phi_{2r}(r) &= \Sigma_{1\rightarrow 2,r}\phi_{1r}(r)
+    \label{eq:two_reflect}
+    \begin{split}
+        -D_{1r}\nabla^2\phi_{1r}(r) + \Sigma_{rr}\phi_{1r}(r) &= 0 \\
+        -D_{2r}\nabla^2\phi_{2r}(r) + \Sigma_{a2r}\phi_{2r}(r) &= \Sigma_{1\rightarrow 2,r}\phi_{1r}(r)
+    \end{split}
 \end{align}
+
+其中下标$r$表示反射层中的物理量。可见反射层中的快群通量$\phi_{1r}(r)$不与热群通量$\phi_{2r}(r)$直接耦合，可以先求出$\phi_{1r}(r)$再推导出$\phi_{2r}(r)$。
+
+定义常数$\mu_r,\nu_r,\gamma_r$，他们都是群常数的函数。
 
 \begin{align}
     \mu_r &= \sqrt{\frac{\Sigma_{rr}}{D_{1r}}} \\
@@ -96,45 +151,56 @@
     \gamma_r &= \sqrt{\frac{\Sigma_{1\rightarrow 2,r}}{D_{2r}}}
 \end{align}
 
+则反射层中的中子通量密度$\phi_{1r},\phi_{2r}$参数化为式\ref{eq:para_phi_rC}。
+其中考虑到反射层无限大，且中子通量密度在无限远处为$0$，$\phi_{1r}(r)$直接舍弃了随着$r$的增大趋于无穷的$e^{\mu_r r}$项；$A_r,B_r,C_r$均为待求参数。
+
 \begin{align}
-    \phi_{1r}(r) &= A_r e^{-\mu r} \\
-    \phi_{1r}(r) &= B_r e^{-\nu r} + C_r e^{-\mu r}
+    \label{eq:para_phi_rC}
+    \begin{split}
+        \phi_{1r}(r) &= A_r e^{-\mu_r r} \\
+        \phi_{2r}(r) &= B_r e^{-\nu_r r} + C_r e^{-\mu_r r}
+    \end{split}
 \end{align}
+
+将$\phi_{1,2r}(r)$带入\ref{eq:two_reflect}，
 
 \begin{align}
     \mu_r^2 C_r e^{-\mu_r r} - \nu_r^2 C_r e^{-\mu_r r} + \gamma_r A_r e^{-\mu_r r} &= 0
 \end{align}
 
+得到$C_r$与$A_r,B_r$的关系，
+
 \begin{align}
     C_r &= \frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}A_r
 \end{align}
 
+至此对反射层中的中子通量密度的参数化完成，参数为$A_r,B_r$，公式适用于$r \geq r_0/2$的区间。
+
 \begin{align}
-    \phi_{1r}(r) &= A_r e^{-\mu_r r} \\
-    \phi_{1r}(r) &= B_r e^{-\nu_r r} + \frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}A_r e^{-\mu_r r}
+    \label{eq:para_phi_r}
+    \begin{split}
+        \phi_{1r}(r) &= A_r e^{-\mu_r r} \\
+        \phi_{2r}(r) &= \frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}A_r e^{-\mu_r r} + B_r e^{-\nu_r r}
+    \end{split}
 \end{align}
 
 \subsection{边界条件}
 
+为了保证中子通量密度和其导数的连续性（一阶可导），我们要求连续性边界条件（式\ref{eq:continue}）成立。
+
 \begin{align}
+    \label{eq:continue}
     \begin{split}
-        \psi_{jc}(r_0 / 2) &= \phi_{jr}(r_0 / 2) \\
-        D_{jc}\psi_{jc}(r_0 / 2) &= D_{jr}\phi_{jr}(r_0 / 2) \\
+        \phi_{jc}(r_0 / 2) &= \phi_{jr}(r_0 / 2) \\
+        D_{jc}\phi_{jc}(r_0 / 2) &= D_{jr}\phi_{jr}(r_0 / 2) \\
         j = 1,2
     \end{split}
 \end{align}
 
-\begin{equation}
-    \pmb{M}(r_0) = 
-    \begin{bmatrix}
-        \alpha\cos(\frac{\mu_c r_0}{2}) & \beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -e^{-\frac{\mu_r r_0}{2}} & 0 \\
-        s_1\alpha\cos(\frac{\mu_c r_0}{2}) & s_2\beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}e^{-\frac{\mu_r r_0}{2}} & -e^{-\frac{\nu_r r_0}{2}} \\
-        -D_{1r}\mu_c\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1r}\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r e^{-\frac{\mu_r r_0}{2}} & 0 \\
-        -D_{1r}\mu_c s_1\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1r}s_2\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}e^{-\frac{\mu_r r_0}{2}} & D_{2r}\nu_r e^{-\frac{\nu_r r_0}{2}}
-    \end{bmatrix}
-\end{equation}
+将\ref{eq:para_phi}和\ref{eq:para_phi_r}带入连续性边界条件，经过整理，最终得到$A_c,B_c,A_r,B_r$的线性方程为\ref{eq:M_AB}，
 
 \begin{align}
+    \label{eq:M_AB}
     \pmb{M}(r_0) \cdot \begin{bmatrix}
         A_c \\
         B_c \\
@@ -142,14 +208,21 @@
         B_r
     \end{bmatrix} &= \pmb{0}
 \end{align}
+\begin{align}
+    \pmb{M}(r_0) &= 
+    \begin{bmatrix}
+        \alpha\cos(\frac{\mu_c r_0}{2}) & \beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -e^{-\frac{\mu_r r_0}{2}} & 0 \\
+        s_1\alpha\cos(\frac{\mu_c r_0}{2}) & s_2\beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}e^{-\frac{\mu_r r_0}{2}} & -e^{-\frac{\nu_r r_0}{2}} \\
+        -D_{1r}\mu_c\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1r}\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r e^{-\frac{\mu_r r_0}{2}} & 0 \\
+        -D_{1r}\mu_c s_1\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1r}s_2\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}e^{-\frac{\mu_r r_0}{2}} & D_{2r}\nu_r e^{-\frac{\nu_r r_0}{2}}
+    \end{bmatrix}
+\end{align}
+
+其中较复杂的$4\times4$矩阵$\pmb{M}$为$r_0$的函数，$\left[A_c,B_c,A_r,B_r\right]^{\mathrm{T}}$有非$0$非平凡解的条件为：
 
 \begin{equation}
     \det \pmb{M}(r_0) = 0
 \end{equation}
 
-\begin{figure}[H]
-    \centering
-    \includesvg[width=0.6\linewidth]{figures/det_M_r.svg}
-    \caption{$\det \pmb{M}(r)$}
-    \label{fig:det_M}
-\end{figure}
+在求出临界宽度$r_0$后我们可以通过求解方程\ref{eq:M_AB}得到$\left[A_c,B_c,A_r,B_r\right]^{\mathrm{T}}$的通解。
+相关计算结果将在第\ref{sec:results}节中展示。

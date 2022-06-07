@@ -3,17 +3,52 @@
 
 \subsection{临界堆芯宽度}
 
-$r_0=38.715\si{cm}$
+$\det \pmb{M}(r_0)=0$显然是一个没有求根公式的超越方程，我们通过数值方法\footnote{\url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize\_scalar.html}.}，
+首先对$\det \pmb{M}(r)$进行参数扫描，如图\ref{fig:det_M}，
 
-$A_c=1$
+\begin{figure}[H]
+    \centering
+    \includesvg[width=0.6\linewidth]{figures/det_M_r.svg}
+    \caption{$\det \pmb{M}(r)$的参数扫描，红色圆点处为$\left(r_0,\det \pmb{M}(r_0)\right)$}
+    \label{fig:det_M}
+\end{figure}
+
+我们取$\det \pmb{M}(r_0)=0$所有正的解中的最小值，得到$r_0=38.715\si{cm}$。
+
+此时$\pmb{M}$中的参数全部确定下来了，将$r_0$代回$\pmb{M}$。由于$\det \pmb{M}(r_0)=0$，方程\ref{eq:M_AB}有无穷多个非0解。
+令$A_c=1$，将$\pmb{M}$表示为分块矩阵：
+
+\begin{align}
+    \pmb{M} &= \begin{bmatrix}
+        M_{00} & M_{0,1\rightarrow 3} \\
+        M_{1\rightarrow 3,0} & M_{1\rightarrow 3,1\rightarrow 3} \\
+    \end{bmatrix}
+\end{align}
+
+则有
+
+\begin{align}
+    \begin{bmatrix}
+        B_c \\
+        A_r \\
+        B_r
+    \end{bmatrix} &= 
+    -M_{1\rightarrow 3,1\rightarrow 3}^{-1}M_{1\rightarrow 3,0}
+\end{align}
+
+可以快速得到其余三个参数$\left[B_c,A_r,B_r\right]^{\mathrm{T}}$。
 
 \subsection{双群通量}
+
+以求得的$\left[A_c,B_c,A_r,B_r\right]^{\mathrm{T}}$计算$\phi_1,\phi_2$，得到结果如图\ref{fig:flux_r}。
 
 \begin{figure}[H]
     \centering
     \includesvg[width=0.6\linewidth]{figures/flux_r.svg}
-    \caption{$\det \pmb{M}(r)$}
+    \caption{$\phi_1,\phi_2$计算结果，红色虚线为芯部与反射层的边界}
     \label{fig:flux_r}
 \end{figure}
+
+红色虚线为芯部与反射层的边界，其左侧（$r$较小一侧）为芯部，右侧为无限大反射层，可见中子通量密度在$r$非常大的时候趋近于$0$。
 
 \subsection{双群伴随通量}
