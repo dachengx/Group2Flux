@@ -1,4 +1,5 @@
 \section{计算过程}
+\label{sec:calculation}
 
 \subsection{芯部通量参数化}
 
@@ -10,7 +11,7 @@
 \begin{align}
     \begin{split}
         L^2 = \frac{D_2}{\Sigma_{a2}},\ \tau &= \frac{D_1}{\Sigma_r - \frac{\nu\Sigma_{f1}}{k_\mathrm{eff}}},\ \delta = \frac{k'-\frac{\nu\Sigma_{f1}}{\Sigma_r}}{k_\mathrm{eff}-\frac{\nu\Sigma_{f1}}{\Sigma_r}} \\
-        k' &= \frac{\nu\Sigma_{f1}+\nu\Sigma_{f2}\frac{\Sigma_{1\rightarrow 2}}{\Sigma-{a2}}}{\Sigma_r}
+        k' &= \frac{\nu\Sigma_{f1}+\nu\Sigma_{f2}\frac{\Sigma_{1\rightarrow 2}}{\Sigma_{a2}}}{\Sigma_r}
     \end{split}
 \end{align}
 
@@ -56,8 +57,8 @@
 \end{align}
 
 \begin{align}
-    \pmb{\nabla}^2\psi_1(r) + \mu^2\psi_1(r) &= 0 \\
-    \pmb{\nabla}^2\psi_2(r) + \mu^2\psi_2(r) &= 0
+    \nabla^2\psi_1(r) + \mu^2\psi_1(r) &= 0 \\
+    \nabla^2\psi_2(r) + \mu^2\psi_2(r) &= 0
 \end{align}
 
 \begin{equation}
@@ -85,8 +86,8 @@
 \subsection{反射层通量参数化}
 
 \begin{align}
-    -D_{1r}\pmb{\nabla}^2\phi_{1r}(r) + \Sigma_{rr}\phi_{1r}(r) &= 0 \\
-    -D_{2r}\pmb{\nabla}^2\phi_{2r}(r) + \Sigma_{a2r}\phi_{2r}(r) &= \Sigma_{1\rightarrow 2,r}\phi_{1r}(r)
+    -D_{1r}\nabla^2\phi_{1r}(r) + \Sigma_{rr}\phi_{1r}(r) &= 0 \\
+    -D_{2r}\nabla^2\phi_{2r}(r) + \Sigma_{a2r}\phi_{2r}(r) &= \Sigma_{1\rightarrow 2,r}\phi_{1r}(r)
 \end{align}
 
 \begin{align}
@@ -113,7 +114,7 @@
     \phi_{1r}(r) &= B_r e^{-\nu_r r} + \frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}A_r e^{-\mu_r r}
 \end{align}
 
-\subsection{边界条件与临界宽度}
+\subsection{边界条件}
 
 \begin{align}
     \begin{split}
@@ -152,18 +153,3 @@
     \caption{$\det \pmb{M}(r)$}
     \label{fig:det_M}
 \end{figure}
-
-$r_0=38.715\si{cm}$
-
-$A_c=1$
-
-\subsection{双群通量}
-
-\begin{figure}[H]
-    \centering
-    \includesvg[width=0.6\linewidth]{figures/flux_r.svg}
-    \caption{$\det \pmb{M}(r)$}
-    \label{fig:flux_r}
-\end{figure}
-
-\subsection{双群伴随通量}

@@ -10,7 +10,9 @@
     \end{split}
 \end{align}
 
-其中群常数$D_g$为扩散系数，$\phi_g$为中子通量密度，$\chi_g$为中子裂变谱，$(\nu\Sigma_f)_{g'}$为中子产生截面。
+其中群常数$\phi_g$为中子通量密度，$D_g$为扩散系数，$\chi_g$为中子裂变谱，$(\nu\Sigma_f)_{g'}$为中子产生截面。
+
+双群近似\ref{eq:two_group}是式\ref{eq:multi_group}的一种特殊情形，一般将中子按照能量分为快群（标号为$g=1$）和热群（标号为$g=2$）。
 
 \begin{align}
     \label{eq:two_group}
@@ -20,6 +22,9 @@
     \end{split}
 \end{align}
 
+考虑物理图像，若选用的分界能$E_c$足够低，以至于没有裂变中子的能量小于$E_c$，亦即没有热中子由裂变产生，自然有$\chi_1=1,\chi_2=0$。
+另外，低的分界能使得热中子大多数情况下不会通过原子核散射获得能量成为快中子，亦即大多数情况下有$\Sigma_{2\rightarrow 1}=0$，由此得到\ref{eq:two2_group}。
+
 \begin{align}
     \label{eq:two2_group}
     \begin{split}
@@ -27,6 +32,8 @@
         -D_2\nabla^2\phi_2(r) + \Sigma_{t2}\phi_2(r) &= \Sigma_{1\rightarrow 2}\phi_1(r) + \Sigma_{2\rightarrow 2}\phi_2(r)
     \end{split}
 \end{align}
+
+由总截面的定义，两式左端的$\Sigma_r\phi(r)$中包含了能群的自散射项，可以在等式两端同时消去。最终得到的常用的双群扩散方程为\ref{eq:two3_group}。
 
 \begin{align}
     \label{eq:two3_group}
@@ -36,28 +43,41 @@
     \end{split}
 \end{align}
 
+可见快群$\phi_1(r)$和热群$\phi_2(r)$之间的耦合使得通量密度需要联立求解。把双群扩散方程写为函数矢量形式，如\ref{eq:vector_phi}。
+
 \begin{equation}
+    \label{eq:vector_phi}
     \pmb{\Phi} = \begin{bmatrix}
         \phi_1(r) \\
         \phi_2(r)
     \end{bmatrix}
 \end{equation}
 
+整理式\ref{eq:two3_group}得到简化的形式，如式\ref{eq:A_vector_phi}。
+
 \begin{equation}
+    \label{eq:A_vector_phi}
     \pmb{\nabla}^2\pmb{\Phi}(\pmb{r})+\pmb{A}\pmb{\Phi}(\pmb{r}) = \pmb{0}
 \end{equation}
 
+其中$\pmb{A}$是$k_\mathrm{eff}$的函数，如式\ref{eq:A}。
+
 \begin{equation}
+    \label{eq:A}
     \pmb{A} = \begin{bmatrix}
         \frac{\frac{\nu\Sigma_{f1}}{k_\mathrm{eff}}-\Sigma_r}{D_1} & \frac{\nu\Sigma_{f2}}{k_\mathrm{eff}D_1} \\
         \frac{\Sigma_{1\rightarrow2}}{D_2} & -\frac{\Sigma_{a2}}{D_2}
     \end{bmatrix}
 \end{equation}
 
+其中所有用到的双群常数在表\ref{tab:constants}中。我们假设一种简化情况：无限大平板反应堆。
+堆芯（Core）和反射层（Reflective layer）中材料不同，群常数也不同，特别的，反射层中的中子产生截面为$0$，
+这使得对后续反射层和堆芯的通量计算过程有一定不同。
+
 \begin{table}[H]
     \centering
-    \caption{}
-    \label{tab:}
+    \caption{一个典型PWR堆芯的少群扩散理论的群常数}
+    \label{tab:constants}
     \begin{tabular}{lllll}
     \toprule
     \multirow{2}{*}{Group constants} & \multicolumn{2}{c}{Core} & \multicolumn{2}{c}{Reflective layer} \\
@@ -71,3 +91,6 @@
     \bottomrule
     \end{tabular}
 \end{table}
+
+本文将以上述推导和群常数列表为基础，计算双群通量密度函数。
+第\ref{sec:calculation}节为主要计算过程，第\ref{sec:results}节为计算结果，第\ref{sec:discussion}节给出对结果的讨论与总结。
