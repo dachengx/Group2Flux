@@ -217,8 +217,8 @@
     \begin{bmatrix}
         \alpha\cos(\frac{\mu_c r_0}{2}) & \beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -e^{-\frac{\mu_r r_0}{2}} & 0 \\
         s_1\alpha\cos(\frac{\mu_c r_0}{2}) & s_2\beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}e^{-\frac{\mu_r r_0}{2}} & -e^{-\frac{\nu_r r_0}{2}} \\
-        -D_{1r}\mu_c\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1r}\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r e^{-\frac{\mu_r r_0}{2}} & 0 \\
-        -D_{1r}\mu_c s_1\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1r}s_2\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}e^{-\frac{\mu_r r_0}{2}} & D_{2r}\nu_r e^{-\frac{\nu_r r_0}{2}}
+        -D_{1c}\mu_c\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1c}\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{1r}\mu_r e^{-\frac{\mu_r r_0}{2}} & 0 \\
+        -D_{2c}\mu_c s_1\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{2c}s_2\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}e^{-\frac{\mu_r r_0}{2}} & D_{2r}\nu_r e^{-\frac{\nu_r r_0}{2}}
     \end{bmatrix}
 \end{align}
 
@@ -230,3 +230,65 @@
 
 在求出临界宽度$r_0$后我们可以通过求解方程\ref{eq:M_AB}得到$\left[A_c,B_c,A_r,B_r\right]^{\mathrm{T}}$的通解。
 相关计算结果将在第\ref{sec:results}节中展示。
+
+\subsection{双群伴随通量的参数化}
+
+双群伴随通量的计算中，双群扩散方程将修改为式\ref{eq:two3_group_adjoint}。
+
+\begin{align}
+    \label{eq:two3_group_adjoint}
+    \begin{split}
+        -D_1\nabla^2\phi_{1c}^*(r) + \Sigma_r\phi_{1c}^*(r) &= \frac{1}{k_\mathrm{eff}}\left[\nu\Sigma_{f1}\phi_{1c}^*(r)+\nu\Sigma_{f2}\phi_{2c}^*(r)\right] \\
+        -D_2\nabla^2\phi_{2c}^*(r)^* + \Sigma_{a2}\phi_{2c}^*(r) &= \Sigma_{1\rightarrow 2}\phi_{1c}^*(r)
+    \end{split}
+\end{align}
+
+其中$\phi_{1,2c}^*$为芯部双群伴随通量。
+
+修正之后对\ref{eq:mu_nu_c}中的$\mu_c,\nu_c$等参数没有影响，对\ref{eq:u12}也没有影响，但是$s_{1,2}$需要修正为式\ref{s_12_adjoint}。其他的中子通量密度函数参数化不变。
+
+\begin{align}
+    \label{s_12_adjoint}
+    s_1 &= \frac{\frac{\nu\Sigma_{f2}}{k_\mathrm{eff}D_2}}{\mu^2 + \frac{1}{L^2}},\ s_2 = \frac{\frac{\nu\Sigma_{f2}}{k_\mathrm{eff}D_2}}{\frac{1}{L^2}-\nu^2} \\
+\end{align}
+
+然而对于反射层的中子通量密度参数化，尤其是式\ref{eq:mu_nu_gamma}，不再成立。为伴随通量更新反射层的中子通量密度方程：
+
+\begin{align}
+    \label{eq:two_reflect_adjoint}
+    \begin{split}
+        -D_{1r}\nabla^2\phi_{1r}^*(r) + \Sigma_{rr}\phi_{1r}^*(r) &= \Sigma_{1\rightarrow 2,r}\phi_{2r}^*(r) \\
+        -D_{2r}\nabla^2\phi_{2r}^*(r) + \Sigma_{a2r}\phi_{2r}^*(r) &= 0
+    \end{split}
+\end{align}
+
+其中$\phi_{1,2r}^*$为反射层双群伴随通量。伴随通量的参数化更新为\ref{eq:para_phi_r_adjoint}。
+
+\begin{align}
+    \gamma_r &= \sqrt{\frac{\Sigma_{1\rightarrow 2,r}}{D_{1r}}}
+\end{align}
+\begin{align}
+    \label{eq:para_phi_r_adjoint}
+    \begin{split}
+        \phi_{1r}^*(r) &= A_r e^{-\mu_r r} + C_r e^{-\nu_r r} \\
+        \phi_{2r}^*(r) &= B_r e^{-\nu_r r}
+    \end{split}
+\end{align}
+
+$C_r$的表达式更新为：
+
+\begin{align}
+    C_r &= \frac{\gamma_r^2}{\mu_r^2 - \nu_r^2}A_r
+\end{align}
+
+同时更新对$\pmb{M}^*(r_0)$的计算：
+
+\begin{align}
+    \pmb{M}^*(r_0) &= 
+    \begin{bmatrix}
+        \alpha\cos(\frac{\mu_c r_0}{2}) & \beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -\cos(\frac{\mu_r r_0}{2}) & -\frac{\gamma_r^2}{\mu_r^2 - \nu_r^2}\cos(\frac{\nu_r r_0}{2}) \\
+        s_1\alpha\cos(\frac{\mu_c r_0}{2}) & s_2\beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & 0 & -\cos(\frac{\nu_r r_0}{2}) \\
+        -D_{1c}\mu_c\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1c}\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{1r}\mu_r\cos(\frac{\mu_r r_0}{2}) & D_{1r}\nu_r\frac{\gamma_r^2}{\mu_r^2 - \nu_r^2}\cos(\frac{\nu_r r_0}{2}) \\
+        -D_{2c}\mu_c s_1\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{2c}s_2\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & 0 & D_{2r}\nu_r \cos(\frac{\nu_r r_0}{2})
+    \end{bmatrix}
+\end{align}

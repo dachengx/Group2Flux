@@ -53,55 +53,7 @@ $\det \pmb{M}(r_0)=0$显然是一个没有求根公式的超越方程，我们�
 
 \subsection{双群伴随通量}
 
-对双群伴随通量的计算，等效于将群常数中的扩散系数$D_g$全部取相反数。
-取反之后对\ref{eq:L_k_delta}中的$k',\delta$等参数没有影响，对\ref{eq:u12}也没有影响。所以芯部的中子通量密度函数参数化不变。
-
-然而对于反射层的中子通量密度参数化，尤其是式\ref{eq:mu_nu_gamma}，不再成立。为伴随通量更新反射层的中子通量密度：
-
-\begin{align}
-    \label{eq:mu_nu_gamma_s}
-    \begin{split}
-        \mu_r &= \sqrt{-\frac{\Sigma_{rr}}{D_{1r}}} \\
-        \nu_r &= \sqrt{-\frac{\Sigma_{a2r}}{D_{2r}}} \\
-        \gamma_r &= \sqrt{-\frac{\Sigma_{1\rightarrow 2,r}}{D_{2r}}} \\
-    \end{split}
-\end{align}
-\begin{align}
-    \label{eq:para_phi_r_s}
-    \begin{split}
-        \phi_{1r}^*(r) &= A_r \cos(\mu_r r) \\
-        \phi_{2r}^*(r) &= \frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}A_r \cos(\mu_r r) + B_r \cos(\nu_r r)
-    \end{split}
-\end{align}
-
-其中式\ref{eq:para_phi_r_s}中为保持$\phi_{1r}^*,\phi_{2r}^*$的偶函数性质，均只取余弦。
-$C_r$的表达式不变：
-
-\begin{align}
-    C_r &= \frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}A_r
-\end{align}
-
-同时更新对$\pmb{M}^*(r_0)$的计算：
-
-\begin{align}
-    \pmb{M}^*(r_0) &= 
-    \begin{bmatrix}
-        \alpha\cos(\frac{\mu_c r_0}{2}) & \beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -\cos(\frac{\mu_r r_0}{2}) & 0 \\
-        s_1\alpha\cos(\frac{\mu_c r_0}{2}) & s_2\beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}\cos(\frac{\mu_r r_0}{2}) & -\cos(\frac{\nu_r r_0}{2}) \\
-        -D_{1r}\mu_c\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1r}\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r \cos(\frac{\mu_r r_0}{2}) & 0 \\
-        -D_{1r}\mu_c s_1\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1r}s_2\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}\cos(\frac{\mu_r r_0}{2}) & D_{2r}\nu_r \cos(\frac{\nu_r r_0}{2})
-    \end{bmatrix}
-\end{align}
-
-类似地，对$\det \pmb{M}(r)$进行参数扫描，如图\ref{fig:det_M_adjoint}，
-
-\begin{figure}[H]
-    \centering
-    \includesvg[width=0.6\linewidth]{figures/det_M_r_adjoint.svg}
-    \caption{$\det \pmb{M}^*(r)$的参数扫描，红色圆点处为$\left(r_0,\det \pmb{M}^*(r_0)\right)$}
-    \label{fig:det_M_adjoint}
-\end{figure}
-
+可以验证，$\det \pmb{M}(r_0)=\det \pmb{M}^*(r_0)=0$。
 以求得的$\left[A_c,B_c,A_r,B_r\right]^{\mathrm{T}}$计算$\phi_1^*,\phi_2^*$，得到结果如图\ref{fig:flux_r_adjoint}。
 
 \begin{figure}[H]
