@@ -10,6 +10,7 @@
 \usepackage{ctex}
 \usepackage{listings}
 \usepackage{multicol}
+\usepackage{multirow}
 \usepackage{verbatim}
 \usepackage{makecell}
 \usepackage{xcolor}
@@ -53,22 +54,314 @@
 
 \begin{frame}
 \frametitle{矢量化双群扩散方程}
+无限大平板反应堆，芯部宽度$r_0$有限且中心位于坐标原点处，反射层为无限大
+\begin{align*}
+    \label{eq:two3_group}
+    \begin{split}
+        -D_1\nabla^2\phi_1(r) + \Sigma_r\phi_1(r) &= \frac{1}{k_\mathrm{eff}}\left[\nu\Sigma_{f1}\phi_1(r)+\nu\Sigma_{f2}\phi_2(r)\right] \\
+        -D_2\nabla^2\phi_2(r) + \Sigma_{a2}\phi_2(r) &= \Sigma_{1\rightarrow 2}\phi_1(r)
+    \end{split}
+\end{align*}
+\noindent\rule{\textwidth}{0.5pt}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{equation*}
+    \label{eq:vector_phi}
+    \pmb{\Phi} = \begin{bmatrix}
+        \phi_1(r) \\
+        \phi_2(r)
+    \end{bmatrix}
+\end{equation*}
+\begin{equation*}
+    \label{eq:A_vector_phi}
+    \pmb{\nabla}^2\pmb{\Phi}(\pmb{r})+\pmb{A}\pmb{\Phi}(\pmb{r}) = \pmb{0}
+\end{equation*}
+\column{0.5\textwidth}
+\begin{equation*}
+    \label{eq:A}
+    \pmb{A} = \begin{bmatrix}
+        \frac{\frac{\nu\Sigma_{f1}}{\textcolor{red}{k_\mathrm{eff}}}-\Sigma_r}{D_1} & \frac{\nu\Sigma_{f2}}{\textcolor{red}{k_\mathrm{eff}}D_1} \\
+        \frac{\Sigma_{1\rightarrow2}}{D_2} & -\frac{\Sigma_{a2}}{D_2}
+    \end{bmatrix}
+\end{equation*}
+\end{columns}
+\ 
 
+\ 
+
+其中$\pmb{A}$是$k_\mathrm{eff}$的函数
 \end{frame}
 
+\begin{frame}
+\frametitle{芯部矩阵$\pmb{A}$特征值分解}
+\footnotesize
+\begin{columns}
+\column{0.5\textwidth}
+\begin{align*}
+    \begin{split}
+        \mu^2 &= \frac{1}{2}\left[-\left(\frac{1}{L^2}+\frac{1}{\tau}\right)+\sqrt{\left(\frac{1}{L^2}+\frac{1}{\tau}\right)^2+\frac{4(\delta-1)}{\tau L^2}}\right] \\
+        \nu^2 &= \frac{1}{2}\left[\left(\frac{1}{L^2}+\frac{1}{\tau}\right)+\sqrt{\left(\frac{1}{L^2}+\frac{1}{\tau}\right)^2+\frac{4(\delta-1)}{\tau L^2}}\right]
+    \end{split}
+\end{align*}
+\column{0.5\textwidth}
+\begin{align*}
+    \begin{split}
+        L^2 = \frac{D_2}{\Sigma_{a2}},\ \tau &= \frac{D_1}{\Sigma_r - \frac{\nu\Sigma_{f1}}{k_\mathrm{eff}}},\ \delta = \frac{k'-\frac{\nu\Sigma_{f1}}{\Sigma_r}}{k_\mathrm{eff}-\frac{\nu\Sigma_{f1}}{\Sigma_r}} \\
+        k' &= \frac{\nu\Sigma_{f1}+\nu\Sigma_{f2}\frac{\Sigma_{1\rightarrow 2}}{\Sigma_{a2}}}{\Sigma_r}
+    \end{split}
+\end{align*}
+\end{columns}
 
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{align*}
+    \begin{split}
+        \pmb{u}_1 = \begin{bmatrix}
+            \alpha \\
+            s_1\alpha
+        \end{bmatrix},\ 
+        \pmb{u}_2 = \begin{bmatrix}
+            \beta \\
+            s_2\beta
+        \end{bmatrix}
+    \end{split}
+\end{align*}
+\column{0.5\textwidth}
+\begin{align*}
+    s_1 &= \frac{\frac{\Sigma_{1\rightarrow 2}}{D_2}}{\mu^2 + \frac{1}{L^2}},\ s_2 = \frac{\frac{\Sigma_{1\rightarrow 2}}{D_2}}{\frac{1}{L^2}-\nu^2} \\
+    \alpha &= \left(1+s_1^2\right)^{-1/2},\ \beta = \left(1+s_2^2\right)^{-1/2}
+\end{align*}
+\end{columns}
+\noindent\rule{\textwidth}{0.5pt}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{align*}
+    \pmb{U} &= \begin{bmatrix}
+        \pmb{u}_1, \pmb{u}_2
+    \end{bmatrix}
+\end{align*}
+\begin{align*}
+    \pmb{A}\pmb{U} &= \pmb{A}\begin{bmatrix}
+        \pmb{u}_1, \pmb{u}_2
+    \end{bmatrix}= \pmb{U}\begin{bmatrix}
+        \mu^2 & \\
+         & -\nu^2
+    \end{bmatrix}
+\end{align*}
+\column{0.5\textwidth}
+\begin{equation*}
+    \pmb{\Phi}(r) = \pmb{U}\pmb{\Psi}(r),\ 
+    \pmb{\Psi} = \begin{bmatrix}
+        \psi_1(r) \\
+        \psi_2(r)
+    \end{bmatrix}
+\end{equation*}
+\begin{equation*}
+    \pmb{U}\left\{\pmb{\nabla}^2\pmb{\Psi}(r)+\pmb{\Lambda}\pmb{\Psi}(r)\right\} = \pmb{0}
+\end{equation*}
+\end{columns}
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{双群扩散理论的群常数}
+\begin{table}[H]
+    \centering
+    \caption{一个典型PWR堆芯的双群扩散理论的群常数}
+    \label{tab:constants}
+    \begin{tabular}{lllll}
+    \toprule
+    \multirow{2}{*}{Group constants} & \multicolumn{2}{c}{Core} & \multicolumn{2}{c}{Reflective layer} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+     & Group 1 & Group 2 & Group 1 & Group 2 \\
+    \midrule
+    $\nu\Sigma_f/\si{cm^{-1}}$ & $0.008476$ & $0.18514$ & $0$ & $0$ \\
+    $\Sigma_a/\si{cm^{-1}}$ & $0.01207$ & $0.1210$ & $0.0004$ & $0.0197$ \\
+    $D/\si{cm}$ & $1.2627$ & $0.3543$ & $1.13$ & $0.16$ \\
+    $\Sigma_r/\si{cm^{-1}}$ & $0.02619$ & $0.1210$ & $0.0494$ & $0.0197$ \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+\end{frame}
+
+\section{临界宽度求解}
+
+\begin{frame}
+\frametitle{芯部中子通量密度参数化}
+\begin{align*}
+    \begin{split}
+        \psi_{1c}(r) &= A_c\cos{\mu_c r} \\
+        \psi_{2c}(r) &= B_c\left(e^{-\nu_c r} + e^{\nu_c r}\right)
+    \end{split}
+\end{align*}
+\begin{align*}
+    \begin{split}
+        \phi_{1c}(r) &= \alpha\psi_{1c}(r) + \beta\psi_{2c}(r) = \alpha A_c\cos{\mu_c r} + \beta B_c\left(e^{-\nu_c r} + e^{\nu_c r}\right) \\
+        \phi_{2c}(r) &= s_1\alpha\psi_{1c}(r) + s_2\beta\psi_{2c}(r) = s_1\alpha A_c\cos{\mu_c r} + s_2\beta B_c\left(e^{-\nu_c r} + e^{\nu_c r}\right)
+    \end{split}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{反射层中子通量密度参数化}
+\begin{align*}
+    \begin{split}
+        -D_{1r}\nabla^2\phi_{1r}(r) + \Sigma_{rr}\phi_{1r}(r) &= 0 \\
+        -D_{2r}\nabla^2\phi_{2r}(r) + \Sigma_{a2r}\phi_{2r}(r) &= \Sigma_{1\rightarrow 2,r}\phi_{1r}(r)
+    \end{split}
+\end{align*}
+\begin{align*}
+    \begin{split}
+        \mu_r &= \sqrt{\frac{\Sigma_{rr}}{D_{1r}}} \\
+        \nu_r &= \sqrt{\frac{\Sigma_{a2r}}{D_{2r}}} \\
+        \gamma_r &= \sqrt{\frac{\Sigma_{1\rightarrow 2,r}}{D_{2r}}}
+    \end{split}
+\end{align*}
+\begin{align*}
+    \begin{split}
+        \phi_{1r}(r) &= A_r e^{-\mu_r r} \\
+        \phi_{2r}(r) &= B_r e^{-\nu_r r} + \frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}A_r e^{-\mu_r r}
+    \end{split}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{边界条件}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{align*}
+    \begin{split}
+        \phi_{jc}(r_0 / 2) &= \phi_{jr}(r_0 / 2) \\
+        D_{jc}\phi_{jc}(r_0 / 2) &= D_{jr}\phi_{jr}(r_0 / 2) \\
+        j = 1,2
+    \end{split}
+\end{align*}
+\column{0.5\textwidth}
+\begin{align*}
+    \label{eq:M_AB}
+    \pmb{M}(\textcolor{red}{r_0}) \cdot \begin{bmatrix}
+        A_c \\
+        B_c \\
+        A_r \\
+        B_r
+    \end{bmatrix} &= \pmb{0}
+\end{align*}
+\end{columns}
+\tiny
+\begin{align*}
+    \pmb{M}(\textcolor{red}{r_0}) &= 
+    \begin{bmatrix}
+        \alpha\cos(\frac{\mu_c r_0}{2}) & \beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -e^{-\frac{\mu_r r_0}{2}} & 0 \\
+        s_1\alpha\cos(\frac{\mu_c r_0}{2}) & s_2\beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}e^{-\frac{\mu_r r_0}{2}} & -e^{-\frac{\nu_r r_0}{2}} \\
+        -D_{1c}\mu_c\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1c}\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{1r}\mu_r e^{-\frac{\mu_r r_0}{2}} & 0 \\
+        -D_{2c}\mu_c s_1\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{2c}s_2\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{2r}\mu_r\frac{\gamma_r^2}{\nu_r^2 - \mu_r^2}e^{-\frac{\mu_r r_0}{2}} & D_{2r}\nu_r e^{-\frac{\nu_r r_0}{2}}
+    \end{bmatrix}
+\end{align*}
+\normalsize
+现只需解方程：$\det \pmb{M}(r_0)=0$
+\end{frame}
+
+\begin{frame}
+\frametitle{临界宽度求解}
+解得临界宽度$r_0=38.715\si{cm}$
+\begin{columns}
+\column{0.5\textwidth}
+\begin{figure}[H]
+    \centering
+    \includesvg[width=1.0\linewidth]{figures/det_M_r.svg}
+    \caption{$\det \pmb{M}(r)$的参数扫描，红色圆点处为$\left(r_0,\det \pmb{M}(r_0)\right)$}
+    \label{fig:det_M}
+\end{figure}
+\column{0.5\textwidth}
+\begin{figure}[H]
+    \centering
+    \includesvg[width=1.0\linewidth]{figures/det_M_r_far.svg}
+    \caption{$\det \pmb{M}(r)$的参数扫描，红色圆点处为$\det \pmb{M}(r_0)=0$的多个解}
+    \label{fig:det_M_r_far}
+\end{figure}
+\end{columns}
+\end{frame}
+
+\section{双群中子通量与伴随通量}
+
+\begin{frame}
+\frametitle{双群中子通量密度}
+令$A_c=1$，将$\pmb{M}$表示为分块矩阵：
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{align*}
+    \pmb{M} &= \begin{bmatrix}
+        M_{00} & M_{0,1\rightarrow 3} \\
+        M_{1\rightarrow 3,0} & M_{1\rightarrow 3,1\rightarrow 3} \\
+    \end{bmatrix}
+\end{align*}
+\column{0.5\textwidth}
+\begin{align*}
+    \begin{bmatrix}
+        B_c \\
+        A_r \\
+        B_r
+    \end{bmatrix} &= 
+    -M_{1\rightarrow 3,1\rightarrow 3}^{-1}M_{1\rightarrow 3,0}
+\end{align*}
+\end{columns}
+以求得的$\left[A_c,B_c,A_r,B_r\right]^{\mathrm{T}}$计算$\phi_1,\phi_2$，得到双群中子通量密度
+\end{frame}
+
+\begin{frame}
+\frametitle{双群中子通量密度与伴随通量密度}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{figure}[H]
+    \centering
+    \includesvg[width=1.0\linewidth]{figures/flux_r.svg}
+    \caption{$\phi_1,\phi_2$计算结果，红色虚线为芯部与反射层的边界}
+    \label{fig:flux_r}
+\end{figure}
+\column{0.5\textwidth}
+\begin{figure}[H]
+    \centering
+    \includesvg[width=1.0\linewidth]{figures/flux_r_adjoint.svg}
+    \caption{$\phi_1^*,\phi_2^*$计算结果，红色虚线为芯部与反射层的边界}
+    \label{fig:flux_r_adjoint}
+\end{figure}
+\end{columns}
+\end{frame}
 
 \section{讨论与总结}
 
 \begin{frame}
-\frametitle{讨论}
+\frametitle{讨论与总结}
 \begin{itemize}
-    \item 
+    \item 中子通量密度曲线在芯部与反射层交界面附近有一个凸起，主要原因是反射层内的热中子吸收比芯部小，而其慢化能力比芯部强，由堆芯泄漏出来的快中子，由于反射层的慢化作用在反射层内大部分都变成了热中子。
+    \item 快中子伴随通量密度$\phi^*_{1c}$要比热中子伴随通量密度$\phi^*_{2c}$小很多，说明对芯部引入慢中子吸收剂将引起更大的反应性变化，其中子价值更高。
+    \item 从双群扩散方程出发，以一个典型压水堆的群常数为例，计算了双群中子通量密度。计算结果符合物理预期，加深了作者对反应堆物理的认知。
 \end{itemize}
 \end{frame}
 
+\appendix
 \begin{frame}[allowframebreaks,noframenumbering]
-% \bibliographystyle{apalike}
+\frametitle{双群伴随通量的$\pmb{M}(r_0)$}
+\tiny
+\begin{align*}
+    \pmb{M}^*(r_0) &= \\ 
+    &\begin{bmatrix}
+        \alpha\cos(\frac{\mu_c r_0}{2}) & \beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & -\cos(\frac{\mu_r r_0}{2}) & -\frac{\gamma_r^2}{\mu_r^2 - \nu_r^2}\cos(\frac{\nu_r r_0}{2}) \\
+        s_1\alpha\cos(\frac{\mu_c r_0}{2}) & s_2\beta(e^{-\frac{\nu_c r_0}{2}}+e^{\frac{\nu_c r_0}{2}}) & 0 & -\cos(\frac{\nu_r r_0}{2}) \\
+        -D_{1c}\mu_c\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{1c}\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & D_{1r}\mu_r\cos(\frac{\mu_r r_0}{2}) & D_{1r}\nu_r\frac{\gamma_r^2}{\mu_r^2 - \nu_r^2}\cos(\frac{\nu_r r_0}{2}) \\
+        -D_{2c}\mu_c s_1\alpha\cos(\frac{\mu_c r_0}{2}) & -D_{2c}s_2\beta(-\nu_c e^{-\frac{\nu_c r_0}{2}}+\nu_c e^{\frac{\nu_c r_0}{2}}) & 0 & D_{2r}\nu_r \cos(\frac{\nu_r r_0}{2})
+    \end{bmatrix}
+\end{align*}
+\normalsize
+\begin{align*}
+    \begin{split}
+        \phi_{1r}^*(r) &= A_r e^{-\mu_r r} + \frac{\gamma_r^2}{\mu_r^2 - \nu_r^2}A_r e^{-\nu_r r} \\
+        \phi_{2r}^*(r) &= B_r e^{-\nu_r r}
+    \end{split}
+\end{align*}
 \end{frame}
 
 \end{document}
